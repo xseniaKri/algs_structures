@@ -14,16 +14,12 @@ def task_3(a, b):
 
 
 def task_4(a, b):
-    if a == 0 or b == 0:
-        raise ValueError("Оба числа должны быть ненулевыми.")
     a2 = a ** 2
     b2 = b ** 2
     return a2 + b2, a2 - b2, a2 * b2, a2 / b2
 
 
 def task_5(a, b):
-    if a == 0 or b == 0:
-        raise ValueError("Оба числа должны быть ненулевыми.")
     a = abs(a)
     b = abs(b)
     return a + b, a - b, a * b, a / b
@@ -40,8 +36,6 @@ def task_7(a, b, c):
 
 
 def task_8(a, b, c):
-    if not min(a, b) < c < max(a, b):
-        raise ValueError("Точка C должна находиться между A и B.")
     return abs(c - a) * abs(c - b)
 
 
@@ -103,17 +97,13 @@ def main():
         title, function, parameters, labels = tasks[int(choice) - 1]
         print(f"\n{title}")
         print("Введите числа по одному (дробную часть можно отделять точкой или запятой).")
-        try:
-            values = [float(input(f"{name} = ").replace(",", ".")) for name in parameters]
-            result = function(*values)
-            if not isinstance(result, tuple):
-                result = (result,)
-            for label, value in zip(labels, result):
-                print(f"{label} = {value:g}")
-        except ValueError as error:
-            print(f"Ошибка ввода: {error}")
-        except OverflowError:
-            print("Слишком большие числа для вычисления.")
+
+        values = [float(input(f"{name} = ").replace(",", ".")) for name in parameters]
+        result = function(*values)
+        if not isinstance(result, tuple):
+            result = (result,)
+        for label, value in zip(labels, result):
+            print(f"{label} = {value:g}")
 
 
 if __name__ == "__main__":
